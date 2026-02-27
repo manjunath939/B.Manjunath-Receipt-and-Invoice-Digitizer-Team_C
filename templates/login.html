@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="/static/css/auth.css">
+
+    <style>
+        /* Mascot container */
+        .mascot {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        svg {
+            width: 160px;
+            height: 160px;
+        }
+
+        /* Eyes */
+        .eye {
+            transition: transform 0.2s ease, opacity 0.2s ease;
+            transform-origin: center;
+        }
+
+        body.email-focus .eye {
+            transform: translateX(4px);
+            opacity: 1;
+        }
+
+        /* Hide eyes when password focused */
+        body.password-focus .eye {
+            opacity: 0;
+        }
+
+        /* Hands */
+        .hand {
+            transition: transform 0.35s ease;
+            transform-origin: center;
+        }
+
+        body.password-focus .hand.left {
+            transform: translate(45px, -70px);
+        }
+
+        body.password-focus .hand.right {
+            transform: translate(-45px, -70px);
+        }
+
+        /* SUCCESS BLINK */
+        @keyframes greenBlink {
+            0% { background: #b7f7c1; }
+            50% { background: #7CFC98; }
+            100% { background: #b7f7c1; }
+        }
+
+        body.login-success {
+            animation: greenBlink 0.25s ease-in-out 4;
+        }
+
+        /* ERROR BLINK */
+        @keyframes redBlink {
+            0% { background: #ffe5e5; }
+            50% { background: #ff4d4d; }
+            100% { background: #ffe5e5; }
+        }
+
+        body.login-error {
+            animation: redBlink 0.4s ease-in-out 5;
+        }
+
+        /* Google button (ONLY NEW ADDITION) */
+        .google-btn {
+            margin-top: 14px;
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            background: #ffffff;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            color: #444;
+        }
+
+        .google-btn:hover {
+            background: #f3f3f3;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <!-- MASCOT -->
+    <div class="mascot">
+        <svg viewBox="0 0 200 200">
+            <circle cx="100" cy="100" r="70" fill="#FFD9B3"/>
+            <circle class="eye" cx="75" cy="90" r="6" fill="#000"/>
+            <circle class="eye" cx="125" cy="90" r="6" fill="#000"/>
+            <path d="M80 120 Q100 135 120 120"
+                  stroke="#000" stroke-width="4" fill="none"/>
+            <rect class="hand left" x="40" y="130" width="30" height="50"
+                  rx="15" fill="#FFD9B3"/>
+            <rect class="hand right" x="130" y="130" width="30" height="50"
+                  rx="15" fill="#FFD9B3"/>
+        </svg>
+    </div>
+
+    <h2>Login</h2>
+
+    {% for m in get_flashed_messages() %}
+        <p style="color:red">{{ m }}</p>
+    {% endfor %}
+
+    <form method="post">
+        <input id="email" name="email" placeholder="Email" required>
+        <input id="password" type="password" name="password" placeholder="Password" required>
+        <button>Login</button>
+    </form>
+
+    <!-- ✅ GOOGLE LOGIN (ONLY ADDITION) -->
+    <a href="{{ url_for('google.login') }}" class="google-btn">
+        Continue with Google
+    </a>
+
+    <br>
+    <div class="auth-links">
+    <a href="/forgot-password"><span class="icon lock"></span> Forgot Password?</a>
+    <a href="/register"><span class="icon pen"></span> Register</a>
+    </div>
+</div>
+
+<script>
+const email = document.getElementById("email");
+const password = document.getElementById("password");
+
+email.addEventListener("focus", () => {
+    document.body.classList.add("email-focus");
+    document.body.classList.remove("password-focus");
+});
+
+email.addEventListener("blur", () => {
+    document.body.classList.remove("email-focus");
+});
+
+password.addEventListener("focus", () => {
+    document.body.classList.add("password-focus");
+});
+
+password.addEventListener("blur", () => {
+    document.body.classList.remove("password-focus");
+});
+</script>
+
+{% if login_success %}
+<script>
+    document.body.classList.add("login-success");
+    setTimeout(() => {
+        window.location.href = "{{ url_for('dashboard') }}";
+    }, 1000);
+</script>
+{% endif %}
+
+{% if get_flashed_messages() %}
+<script>
+    document.body.classList.add("login-error");
+    setTimeout(() => {
+        document.body.classList.remove("login-error");
+    }, 2000);
+</script>
+{% endif %}
+
+</body>
+</html>

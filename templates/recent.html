@@ -1,0 +1,77 @@
+<link rel="stylesheet" href="/static/css/auth.css">
+
+<style>
+.page-container {
+    width: 100%;
+    min-height: 100vh;
+    padding: 30px 60px;
+    background: #f6f7fb;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.table-box {
+    background: #ffffff;
+    border-radius: 12px;
+    overflow-x: auto;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #eef1ff;
+    text-align: left;
+    padding: 14px;
+    font-size: 14px;
+}
+
+td {
+    padding: 14px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+.download-btn {
+    text-decoration: none;
+    color: #6a5acd;
+    font-weight: bold;
+}
+</style>
+
+<div class="page-container">
+    <div class="page-header">
+        <h2>🕒 Recent Documents</h2>
+        <a href="/dashboard">← Back to Dashboard</a>
+    </div>
+
+    <div class="table-box">
+        <table>
+            <tr>
+                <th>File Name</th>
+                <th>Type</th>
+                <th>Uploaded Date</th>
+                <th>Download</th>
+            </tr>
+
+            {% for d in docs %}
+            <tr>
+                <td>{{ d[0] }}</td>
+                <td>{{ d[2] }}</td>
+                <td>{{ d[3][:10] }}</td>
+                <td>
+                    <a class="download-btn" href="/download/{{ d[1] }}">⬇ Download</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>

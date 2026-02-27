@@ -1,0 +1,46 @@
+<link rel="stylesheet" href="/static/css/dashboard.css">
+
+<div class="topbar">
+    <h2>📁 Dashboard</h2>
+    <div class="topbar-right">
+        <!-- Profile Picture -->
+        {% if profile_pic %}
+            <img src="{{ profile_pic }}" alt="Profile" class="profile-pic">
+        {% endif %}
+
+        <!-- Links -->
+        <a href="/upload">Upload</a>
+        <a href="/logout">Logout</a>
+    </div>
+</div>
+
+<!-- Upload Box -->
+<div class="upload-box">
+    <h2>Upload Document</h2>
+    <p>Drag & Drop your receipt and invoice files here<br>
+       or <a href="/upload">Browse</a> to upload</p>
+    <a class="upload-btn" href="/upload">+ Upload Document</a>
+</div>
+
+<!-- Stats -->
+<div class="stats">
+    <div class="stat-card">
+        <p>Total Documents</p>
+        <h1>{{ total_docs }}</h1>
+    </div>
+    <div class="stat-card">
+        <p>This Month Uploads</p>
+        <h1>{{ month_docs }}</h1>
+    </div>
+</div>
+
+<!-- Action Buttons -->
+<div class="actions">
+    <!-- WORKING -->
+    <a class="action green" href="/trends">📈 Trends Over Time</a>
+    <a class="action purple" href="/recent">🕒 Recent Data</a>
+
+    <!-- NOT WORKING YET -->
+    <a class="action disabled" title="Coming soon">📁 Documents by Category</a>
+    <a class="action disabled" title="Coming soon">🔍 Search & Download</a>
+</div>

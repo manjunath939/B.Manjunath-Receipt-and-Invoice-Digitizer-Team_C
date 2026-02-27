@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OCR Result</title>
+    <link rel="stylesheet" href="/static/css/auth.css">
+
+    <style>
+        .page-container {
+            width: 100%;
+            min-height: 100vh;
+            padding: 40px 60px;
+            background: #f6f7fb;
+        }
+
+        .status-box {
+            background: #e9f9ef;
+            border-left: 6px solid #2ecc71;
+            padding: 18px 22px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            color: #1e8449;
+            font-weight: bold;
+        }
+
+        .preview-box {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .preview-card {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 14px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            width: 50%;
+        }
+
+        .preview-card img {
+            max-width: 100%;
+            border-radius: 10px;
+            border: 1px solid #eee;
+        }
+
+        .ocr-text {
+            white-space: pre-wrap;
+            text-align: justify;
+            font-size: 14px;
+            line-height: 1.6;
+            max-height: 450px;
+            overflow-y: auto;
+            border: 1px solid #eee;
+            padding: 15px;
+            border-radius: 8px;
+            background: #fafafa;
+        }
+
+        .download-box {
+            background: #ffffff;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .download-box a {
+            display: inline-block;
+            margin: 10px;
+            padding: 12px 22px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #6a5acd;
+            color: #ffffff;
+        }
+
+        .download-box a:hover {
+            background: #5a4fcf;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 25px;
+            font-weight: bold;
+            color: #6a5acd;
+            text-decoration: none;
+        }
+
+        @media (max-width: 900px) {
+            .preview-box {
+                flex-direction: column;
+            }
+            .preview-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div class="page-container">
+
+    <h2>📄 OCR Processing Result</h2>
+
+    <div class="status-box">
+        ✅ OCR completed successfully
+    </div>
+
+    <div class="preview-box">
+
+    <div class="preview-card">
+        <h4>Original Document</h4>
+        <img src="/uploads/{{ filename }}" alt="Original document">
+    </div>
+
+    <div class="preview-card">
+        <h4>Extracted Information</h4>
+
+        <p><strong>Vendor:</strong> {{ vendor or "—" }}</p>
+        <p><strong>Invoice No:</strong> {{ invoice_no or "—" }}</p>
+        <p><strong>Date:</strong> {{ bill_date or "—" }}</p>
+        <p><strong>Total:</strong> ₹{{ total_amount or "—" }}</p>
+
+        {% if items %}
+            <hr>
+            <h4>Items</h4>
+            <ul>
+                {% for item in items %}
+                    <li>{{ item.name }} — ₹{{ item.price }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+</div>
+    <div class="download-box">
+        <h3>⬇ Download</h3>
+        <a href="/download/{{ filename }}">Download Original</a>
+        <a href="/download-ocr/pdf/{{ filename }}">Download PDF</a>
+    </div>
+
+    <a class="back-link" href="/dashboard">← Back to Dashboard</a>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<link rel="stylesheet" href="/static/css/auth.css">
+<div class="card">
+<h2>Verify OTP</h2>
+
+{% for m in get_flashed_messages() %}
+<p style="color:red">{{ m }}</p>
+{% endfor %}
+
+<form method="post">
+<input name="otp" placeholder="Enter OTP" required>
+<button>Verify</button>
+</form>
+
+<p>{{ email }}</p>
+</div>

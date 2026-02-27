@@ -1,0 +1,37 @@
+<link rel="stylesheet" href="/static/css/auth.css">
+
+<div class="card">
+    <h2>Register</h2>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for m in messages %}
+          <div class="flash">{{ m }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="post">
+        <input name="name" placeholder="Full Name" required>
+        <input name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+
+        <select name="language" required>
+            <option value="">Preferred Language</option>
+            <option>English</option>
+            <option>हिंदी (Hindi)</option>
+            <option>தமிழ் (Tamil)</option>
+            <option>తెలుగు (Telugu)</option>
+            <option>ಕನ್ನಡ (Kannada)</option>
+            <option>മലയാളം (Malayalam)</option>
+            <option>বাংলা (Bengali)</option>
+            <option>मराठी (Marathi)</option>
+        </select>
+
+        <button>Register</button>
+    </form>
+
+    <div class="auth-links">
+        <a href="/login">Already have an account? Login</a>
+    </div>
+</div>

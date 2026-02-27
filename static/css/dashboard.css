@@ -1,0 +1,131 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f6f8fc;
+    margin: 0;
+    padding: 20px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topbar a {
+    margin-left: 15px;
+    text-decoration: none;
+    color: #555;
+}
+
+.upload-box {
+    background: #f1f4fb;
+    border: 2px dashed #cbd3f5;
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.upload-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 12px 20px;
+    background: #4f6ef7;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+.stats {
+    display: flex;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.stat-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    width: 50%;
+}
+
+.actions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.action {
+    padding: 18px;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.blue { background: #4f6ef7; }
+.green { background: #3bb59a; }
+.orange { background: #f5a742; }
+.purple { background: #7b78d1; }
+
+.recent table {
+    width: 100%;
+    background: white;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.recent th, .recent td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+.action.disabled {
+    background: #d1d5db;
+    color: #6b7280;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    background-color: #1f2937;
+    color: white;
+}
+
+.topbar h2 {
+    margin: 0;
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.topbar-right a {
+    color: white;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    background-color: #4f46e5;
+}
+
+.topbar-right a:hover {
+    background-color: #6366f1;
+}
+
+.profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #fff;
+}
+

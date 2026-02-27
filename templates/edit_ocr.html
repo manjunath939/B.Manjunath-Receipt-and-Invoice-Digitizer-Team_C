@@ -1,0 +1,17 @@
+<!-- templates/edit_ocr.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit OCR Text</title>
+</head>
+<body>
+<h2>Edit OCR Text for {{ filename }}</h2>
+<form method="POST">
+    <textarea name="edited_text" rows="20" cols="100">{{ ocr_text }}</textarea>
+    <br>
+    <button type="submit">Download Edited PDF</button>
+</form>
+
+<a href="{{ url_for('download_ocr_pdf', filename=filename) }}">Download Original PDF</a>
+</body>
+</html>

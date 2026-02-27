@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="/static/css/auth.css">
+
+<div class="card">
+<h2>Upload Document</h2>
+
+{% for m in get_flashed_messages() %}
+<div class="flash">{{ m }}</div>
+{% endfor %}
+
+<form method="post" enctype="multipart/form-data">
+    <input type="file" name="file" required>
+
+    <select name="doc_type" required>
+        <option value="">Document Type</option>
+        <option value="Receipt">Receipt</option>
+        <option value="Invoice">Invoice</option>
+    </select>
+
+    <button>Upload</button>
+</form>
+
+<div class="auth-links">
+    <a href="/dashboard">Back to Dashboard</a>
+</div>
+</div>

@@ -1,0 +1,85 @@
+<link rel="stylesheet" href="/static/css/auth.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+.page-container {
+    width: 100%;
+    min-height: 100vh;
+    padding: 30px 60px;
+    background: #f6f7fb;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.chart-box {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 14px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+</style>
+
+<div class="page-container">
+    <div class="page-header">
+        <h2>📈 Trends Over Time ({{ year }})</h2>
+        <a href="/dashboard">← Back to Dashboard</a>
+    </div>
+
+    <div class="chart-box">
+        <canvas id="trendChart" height="120"></canvas>
+    </div>
+</div>
+
+<script id="trend-data" type="application/json">
+{
+  "labels": {{ labels | tojson }},
+  "values": {{ values | tojson }}
+}
+</script>
+
+<script>
+const trendData = JSON.parse(
+    document.getElementById("trend-data").textContent
+);
+
+new Chart(document.getElementById("trendChart"), {
+    type: "line",
+    data: {
+        labels: trendData.labels,
+        datasets: [{
+            label: "Documents Uploaded",
+            data: trendData.values,
+            borderColor: "#6a5acd",
+            backgroundColor: "rgba(106,90,205,0.15)",
+            fill: true,
+            tension: 0.35
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: { display: false }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: "Number of Documents"
+                }
+            },
+            x: {
+                title: {
+                    display: true,
+                    text: "Months (Current Year)"
+                }
+            }
+        }
+    }
+});
+</script>
