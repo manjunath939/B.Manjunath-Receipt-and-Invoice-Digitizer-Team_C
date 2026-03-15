@@ -1,0 +1,151 @@
+---- static/receipts\04462c5f44421443f42428f0a500a631.png
+
+OCR TEXT:
+sales receipt
+farsa
+J
+prices found: []
+
+---- static/receipts\3fbba2f59cfe7fdd50982a76135f8414.png
+
+OCR TEXT:
+Wal t><
+almart >,<
+‘oteconey tive better
+Bobs 482 shee
+Macawer Uri ART IKiy
+ABBE NO RL SR IG ate
+“AMHR. 33604
+Sas Pa rdacieé6? FTEs he "8p On582
+meta, WIPES ALG 2 F 2 BBN
+Bee To egegsitg | ? 88%
+nn i iP cer 3 84N
+hs ri ene Wi an 3 844%
+sv oN mE OR OOH aS 75ST o Ray
+as Os ua
+eo eM eG ON BST Gh 4385,
+i Ls Si Pon ae " SHON
+Pu LL TOS. PU 198 N
+- MoM LRG Bee 8 ®
+: wot Welhal rag: ". 48N
+Mel eB ae Be + 7.84»
+can JO S3BBEI455 +b  68!
+; SUBTUTAL 46.04
+MbBTO TENT 46.30
+ThAR LY ub ¢ tt
+. ta “ay bi M pee Mate
+” ” ety
+see om TNE DiRT ND eye BE
+vv Lo “f ig «: 534
+teas, phi nie Moke Mane
+at § DA BURL ASE
+bia : vas ST GE, RO
+ee Cf fap a rr
+SLA ede C4 YE
+946d 8 baw Pe Plestearscs
+rs rt ar
+a ce 24.59
+prices found: ['482', '33604', '2', '2', '3', '3', '198', '8', '46.04', '46.30', '534', '8', '24.59']
+
+---- static/receipts\4c071a377d238aa360d81fc7b8a32b95.png
+
+OCR TEXT:
+TOM GREEN HANDYMAN
+S Any Street Any ‘lity That 4rea Code
+Telephare 5800 <4" 7 k4
+ate ne Invaice No 7
+Tar RegisteredNo = 123456
+TAX INVOICE
+Quanuty Cescripusn Unit Price Lost
+Upgrade te Bathrcom
+"aor t oh toe
+“a toy
+Total Due} $3 367.20
+Ce teh v'he 12 3456 789112 012
+ti he ne
+Remittance
+Mr and Mrs Fielding
+feet Amount Que $3.36/7.20
+pr et émount Paid
+>> Total Due} $3 367.20
+prices found: ['5800', '7', '7', '123456', '$3', '367.20', '12', '3456', '789112', '012']
+
+---- static/receipts\883aa66e483bd1321f1553c15c1198e0.png
+
+OCR TEXT:
+[Company Name] INVOICE
+Stret Aendres
+Tire oT TIF
+wis ea. ou
+puro
+. . ai al noe
+"Ae ATE :
+real $a
+prices found: []
+
+---- static/receipts\9713f265494bd7caf430e6f25ad35bfd.png
+
+OCR TEXT:
+Pakle
+
+Sou Dota oandeBecdaer bp oe DAN Gare che op oe he watt?
+Construct English Item Brazilian Portuguese Item N items Alpha
+Intention ta Assaming: TP tave access ta the ssstem. Po Avsieniade qi ete tenth dice sso de : (hus
+HINy Titer te tise at sistema, Pretender avd deo
+Percenved Ustis the system improves my pertornitice fare este ate ditara: mic dese | 198
+usefulness may job potion ia met trabathe,
+Pereenved Mas interaction with the system is clea amd Mandar aitenacdie cam oct sistenta | (S87
+vase at Hse understandable thane compreensived
+Jub Trois goby Usaee of the system rs rpeortant Ne mete trabetddie oo tyver cde Stste med ¢ 2 aud
+telev ae Mpar tants
+Output quil The quality ot the output Poet tram the Wo geediedide dee restdtades qa oct 2 (Rt
+1 syater is tih, ce tion cdev sestemuate alte
+Results To tave ce dithcults telling ethers about the Ate deat tendtes date ithdaude cnt couttar | 77
+detiretistha results ef using the sv stem des tttes vedere os resudides des tise
+tality cles sistema
+ae a 0 woe  onab oar.
+prices found: ['198', '2', '2', '1', '77', '0']
+
+---- static/receipts\a8fb7a6fc2eddbf8c4ff36d28f7d2d47.png
+
+OCR TEXT:
+Walmart ><
+“ase noney oiee better
+“HOE. 982 156%
+Mavager COLE SEN BRICKE ©
+PRR ON ELTA AL.
+“Hert FL 33604
+Bra. CUB UIICN6’ "EB Le "Re L538
+ate seh C L352 F 2 BBN
+moos DIA IGEG St et ? 8B
+a Se 2k, Pak Sans Se 3 84h
+ns 22.28 Sacee R44
+Pie i eM. a Oe Ci Cy
+eB BT IR A TI IQS py4
+oes 25 Pre Par) 4985
+i LO i i cc Oe "SHON
+ee tt NOR ASE KEE “ 3BON
+. mM TIES See eB»
+: vet ay 40s Neen Da “2.48%
+ae wo ODT IB A lobe § 7.84 «x
+"4. 36.5388 "455 | ‘ 88 :
+SuBTGTA, 46.34
+tee  _ 4 “t
+“Te, an de
+MBI TENT 460329
+SeEM SS ULE ‘7r
+. toe ify FROM bra MASete
+ve yo 5 2bG
+a. 4, foe et ASE
+coer Me TN GERD NUD ey Sil:
+a foo! +4
+te Lon, hey nie Moen Mee
+. ae beks
+444 SB ORUPASL
+Steg tbe ots grogn
+Ly ee fo - renee, . eyorta
+“STR Te ed 74
+BA ee ade 24a
+prices found: ['982', '33604', '2', '3', '22.28', '25', '4985', '7.84', '36.5388', '88', '46.34', '4', '460329', '5', '444', '74']
+
+---- static/receipts\a909ef3315f1cac8bb017eed7db444c3.png

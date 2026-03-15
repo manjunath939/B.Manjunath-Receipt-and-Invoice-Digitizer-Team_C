@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - RECEIPT and INVOICE DIGITIZER</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+        .navbar {
+            background: rgba(15, 12, 41, 0.8);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            padding: 1.2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(100, 200, 255, 0.1);
+        }
+        .navbar .logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #64c8ff 0%, #00d4ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 1px;
+        }
+        .navbar .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        .navbar .nav-links a {
+            text-decoration: none;
+            color: #b0b0b0;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+        .navbar .nav-links a:hover {
+            color: #64c8ff;
+            background: rgba(100, 200, 255, 0.1);
+            transform: translateY(-2px);
+        }
+        .content {
+            padding: 150px 3rem 4rem;
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(100, 200, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(100, 200, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(100, 200, 255, 0.1);
+        }
+        .content h1 {
+            text-align: center;
+            background: linear-gradient(135deg, #64c8ff 0%, #00d4ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+        .content p {
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: #a0a0a0;
+            font-size: 1.05rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">RECEIPT & INVOICE DIGITIZER</div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/login">Sign In</a></li>
+            <li><a href="/register_page">New User</a></li>
+            <li><a href="/admin_login">Admin</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <h1>About Our Platform</h1>
+        <p><strong>RECEIPT and INVOICE DIGITIZER</strong> is a cutting-edge web application designed to simplify the process of managing receipts and invoices. Using advanced AI-powered OCR technology, it automatically extracts key information from receipt images, allowing users to store, organize, and analyze their expenses effortlessly.</p>
+        <p>Our platform offers user-friendly dashboards for both regular users and administrators, providing insights into spending patterns, receipt analytics, and more. With features like professional PDF generation, intelligent chatbot assistance, and secure user management, our solution is your go-to platform for digital receipt and invoice handling.</p>
+        <p>Whether you're an individual tracking personal expenses, a freelancer managing invoices, or a business managing multiple receipts, RECEIPT and INVOICE DIGITIZER streamlines the process and saves you valuable time.</p>
+    </div>
+
+    <script>
+        const body = document.body;
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            body.classList.add(savedTheme);
+        }
+    </script>
+</body>
+</html>

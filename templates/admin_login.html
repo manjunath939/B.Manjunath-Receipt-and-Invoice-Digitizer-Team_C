@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Register - RECEIPT & INVOICE DIGITIZER</title>
+<title>Admin Login - Receipt Digitizer</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -171,7 +171,7 @@ body::after {
   font-weight: 600;
 }
 
-.register-btn {
+.login-btn {
   width: 100%;
   padding: 14px;
   border: none;
@@ -185,12 +185,12 @@ body::after {
   margin-top: 10px;
 }
 
-.register-btn:hover {
+.login-btn:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
 }
 
-.register-btn:active {
+.login-btn:active {
   transform: translateY(-1px);
 }
 
@@ -198,25 +198,46 @@ body::after {
   background: rgba(255, 193, 7, 0.1);
   border-left: 4px solid #ffc107;
   padding: 12px 15px;
-  margin-top: 20px;
   border-radius: 8px;
-  font-size: 14px;
+  margin: 20px 0 0 0;
+  font-size: 13px;
   color: #856404;
 }
 
-.links {
+.footer-links {
+  margin-top: 25px;
   text-align: center;
-  margin-top: 20px;
 }
 
-.links a {
+.footer-links p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.footer-links a {
   color: #667eea;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
-.links a:hover {
+.footer-links a:hover {
+  color: #764ba2;
   text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .container {
+    height: auto;
+    flex-direction: column;
+  }
+  .left-panel {
+    padding: 40px 30px;
+  }
+  .right-panel {
+    padding: 40px 30px;
+  }
 }
 </style>
 </head>
@@ -225,17 +246,17 @@ body::after {
 
 <div class="container">
   <div class="left-panel">
-    <div class="lock-icon">🚀</div>
-    <h1>RECEIPT & INVOICE DIGITIZER</h1>
-    <p>Join thousands of users who trust our platform for efficient receipt and invoice management with AI-powered OCR technology.</p>
+    <div class="lock-icon">🔐</div>
+    <h1>Admin Portal</h1>
+    <p>Secure access to manage your receipt digitization system and user accounts.</p>
   </div>
 
   <div class="right-panel">
-    <h2>Create Account</h2>
+    <h2>Login</h2>
 
     <div class="field">
       <input id="email" placeholder=" " />
-      <label>Email</label>
+      <label>Email Address</label>
     </div>
 
     <div class="field">
@@ -243,42 +264,35 @@ body::after {
       <label>Password</label>
     </div>
 
-    <div class="field">
-      <input id="adminCode" placeholder=" " />
-      <label>Admin Code (optional)</label>
-    </div>
-
-    <button class="register-btn" onclick="register()">Create Account</button>
+    <button class="login-btn" onclick="login()">Login as Admin</button>
 
     <div class="info-box">
-      <strong>Admin Access:</strong> Enter an admin code during registration to gain administrative privileges.
+      ℹ️ Only authorized administrators can access this portal.
     </div>
 
-    <div class="links">
-      <a href="/">Already have an account? Sign In</a>
+    <div class="footer-links">
+      <p>Not an admin? <a href="/">Go to user login</a></p>
     </div>
   </div>
 </div>
 
 <script>
-async function register(){
-  const res = await fetch("/register",{
+async function login(){
+  const res = await fetch("/admin_login",{
     method:"POST",
     headers:{"Content-Type":"application/json"},
     body: JSON.stringify({
       email: email.value,
-      password: password.value,
-      admin_code: adminCode.value
+      password: password.value
     })
   });
 
   const data = await res.json();
 
-  if(data.msg){
-    alert("Registered successfully 🎉");
-    window.location = "/";
+  if(data.msg === "admin"){
+    window.location = "/admin_dashboard";
   } else {
-    alert("Email already exists 😬");
+    alert("Invalid admin credentials 😬");
   }
 }
 </script>
