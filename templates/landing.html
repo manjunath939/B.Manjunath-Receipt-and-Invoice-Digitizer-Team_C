@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document Digitizer</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    color: #1f2937;
+    background: linear-gradient(-45deg, #eef2ff, #e0e7ff, #f5f3ff, #eef2ff);
+    background-size: 400% 400%;
+    animation: gradientMove 12s ease infinite;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ===== NAVBAR ===== */
+.nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 18px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    background: rgba(255,255,255,0.75);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+    z-index: 100;
+}
+
+.nav h1 {
+    margin: 0;
+    font-size: 22px;
+    color: #4f46e5;
+    font-weight: 700;
+}
+
+.nav a {
+    text-decoration: none;
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    color: #ffffff;
+    padding: 10px 24px;
+    border-radius: 24px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.nav a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(79,70,229,0.3);
+}
+
+/* ===== HERO ===== */
+.hero {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 50px;
+    padding: 160px 90px 100px;
+    align-items: center;
+}
+
+.hero h2 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: #111827;
+}
+
+.hero p {
+    font-size: 18px;
+    line-height: 1.7;
+    color: #4b5563;
+    max-width: 520px;
+}
+
+.hero ul {
+    margin-top: 22px;
+    padding-left: 18px;
+}
+
+.hero li {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.hero-btn {
+    margin-top: 32px;
+    display: inline-block;
+    padding: 14px 30px;
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    color: white;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.hero-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(79,70,229,0.35);
+}
+
+/* ===== MOCK DASHBOARD ===== */
+.mock {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 30px 60px rgba(79,70,229,0.25);
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+    100% { transform: translateY(0px); }
+}
+
+.mock-card {
+    background: #f9fafb;
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 14px;
+    transition: 0.3s;
+}
+
+.mock-card:hover {
+    background: #eef2ff;
+}
+
+.mock-title {
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.mock-small {
+    font-size: 14px;
+    color: #6b7280;
+}
+
+/* ===== SECTIONS ===== */
+section {
+    padding: 100px 90px;
+}
+
+section.alt {
+    background: white;
+}
+
+h3 {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 60px;
+    color: #4f46e5;
+}
+
+/* ===== FEATURES ===== */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+}
+
+.feature {
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.07);
+    transition: 0.3s;
+}
+
+.feature:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(79,70,229,0.15);
+}
+
+.feature h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.feature p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #4b5563;
+}
+
+/* ===== HOW IT WORKS ===== */
+.steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px;
+}
+
+.step {
+    text-align: center;
+}
+
+.step span {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    color: white;
+    font-weight: bold;
+    line-height: 50px;
+    margin-bottom: 14px;
+}
+
+/* ===== CTA ===== */
+.cta {
+    text-align: center;
+    padding: 100px;
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    color: white;
+}
+
+.cta h2 {
+    font-size: 34px;
+}
+
+.cta a {
+    display: inline-block;
+    margin-top: 24px;
+    background: white;
+    color: #4f46e5;
+    padding: 14px 34px;
+    border-radius: 30px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.cta a:hover {
+    transform: translateY(-3px);
+}
+
+/* ===== SCROLL REVEAL ===== */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .hero {
+        grid-template-columns: 1fr;
+        padding: 140px 30px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="nav">
+    <h1>Document Digitizer</h1>
+    <a href="{{ url_for('login') }}">Get Started</a>
+</div>
+
+<!-- HERO SECTION FIXED -->
+<div class="hero">
+
+    <div class="reveal">
+        <h2>Manage Receipts. Stay Organized.</h2>
+        <p>
+            Upload, store, and access your receipts and invoices securely —
+            anytime, anywhere.
+        </p>
+
+        <ul>
+            <li>✔ Secure document storage</li>
+            <li>✔ Upload, search & download anytime</li>
+            <li>✔ Clear monthly tracking</li>
+        </ul>
+
+        <a href="{{ url_for('login') }}" class="hero-btn">Start Now</a>
+    </div>
+
+    <div class="mock reveal">
+        <div class="mock-card">
+            <div class="mock-title">Recent Document</div>
+            <div class="mock-small">Invoice_Receipt.pdf</div>
+        </div>
+
+        <div class="mock-card">
+            <div class="mock-title">Storage</div>
+            <div class="mock-small">Documents Organized Securely</div>
+        </div>
+
+        <div class="mock-card">
+            <div class="mock-title">System Status</div>
+            <div class="mock-small">All Documents Synced</div>
+        </div>
+    </div>
+
+</div>
+
+<section class="alt">
+    <h3 class="reveal">Core Features</h3>
+
+    <div class="grid">
+        <div class="feature reveal">
+            <h4>📁 Smart Upload</h4>
+            <p>Upload receipts and invoices securely in image or PDF format.</p>
+        </div>
+
+        <div class="feature reveal">
+            <h4>📊 Tracking & Trends</h4>
+            <p>Monitor document activity and monthly progress visually.</p>
+        </div>
+
+        <div class="feature reveal">
+            <h4>🔍 Quick Retrieval</h4>
+            <p>Search and download stored documents instantly.</p>
+        </div>
+
+        <div class="feature reveal">
+            <h4>🔐 Secure Access</h4>
+            <p>Protected login with email and Google authentication.</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h3 class="reveal">How It Works</h3>
+
+    <div class="steps">
+        <div class="step reveal">
+            <span>1</span>
+            <p>Create or login to your account</p>
+        </div>
+
+        <div class="step reveal">
+            <span>2</span>
+            <p>Upload receipts and invoices</p>
+        </div>
+
+        <div class="step reveal">
+            <span>3</span>
+            <p>Organize, search, and download anytime</p>
+        </div>
+    </div>
+</section>
+
+<div class="cta">
+    <h2>Ready to go paperless?</h2>
+    <a href="{{ url_for('login') }}">Start Digitizing</a>
+</div>
+
+<script>
+function reveal() {
+    const reveals = document.querySelectorAll(".reveal");
+
+    reveals.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+
+        if (rect.top < windowHeight - 120 && rect.bottom > 120) {
+            el.classList.add("active");
+        } else {
+            el.classList.remove("active");
+        }
+    });
+}
+
+window.addEventListener("scroll", reveal);
+window.addEventListener("load", reveal);
+</script>
+
+</body>
+</html>

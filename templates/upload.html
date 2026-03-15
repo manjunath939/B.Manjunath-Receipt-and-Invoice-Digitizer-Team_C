@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Document</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+        }
+
+        .glass-card {
+            width: 450px;
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(18px);
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            color: white;
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .flash {
+            background: rgba(255,0,0,0.2);
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .drop-zone {
+            border: 2px dashed rgba(255,255,255,0.4);
+            border-radius: 15px;
+            padding: 35px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .drop-zone:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: #38bdf8;
+        }
+
+        .drop-zone input {
+            display: none;
+        }
+
+        .drop-text {
+            font-size: 16px;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .browse-text {
+            font-size: 14px;
+            margin: 8px 0 0 0;
+            color: #cbd5e1;
+        }
+
+        .file-name {
+            margin-top: 12px;
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            background: linear-gradient(135deg, #38bdf8, #6366f1);
+            color: white;
+            transition: 0.3s ease;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(99,102,241,0.4);
+        }
+
+        .back-link {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .back-link a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-link a:hover {
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="glass-card">
+
+    <h2>📤 Upload Document</h2>
+
+    {% for m in get_flashed_messages() %}
+        <div class="flash">{{ m }}</div>
+    {% endfor %}
+
+    <form method="post" enctype="multipart/form-data">
+
+        <div class="drop-zone" id="dropZone">
+            <p class="drop-text">Drag & Drop your file here</p>
+            <p class="browse-text">or Click to Browse</p>
+            <input type="file" name="file" id="fileInput" required>
+            <div class="file-name" id="fileName"></div>
+        </div>
+
+        <select name="doc_type" required>
+            <option value="">Select Document Type</option>
+            <option value="Receipt">Receipt</option>
+            <option value="Invoice">Invoice</option>
+        </select>
+
+        <input type="hidden" name="latitude" id="latitude">
+        <input type="hidden" name="longitude" id="longitude">
+        <button type="submit">Upload Now</button>
+
+    </form>
+
+    <div class="back-link">
+        <a href="/dashboard">← Back to Dashboard</a>
+    </div>
+
+</div>
+<script>
+const dropZone = document.getElementById("dropZone");
+const fileInput = document.getElementById("fileInput");
+const fileName = document.getElementById("fileName");
+const form = document.querySelector("form");
+const latInput = document.getElementById("latitude");
+const lngInput = document.getElementById("longitude");
+
+let locationCaptured = false;
+
+dropZone.addEventListener("click", () => {
+    fileInput.click();
+});
+
+fileInput.addEventListener("change", function() {
+    if (this.files.length > 0) {
+        fileName.textContent = "Selected: " + this.files[0].name;
+    }
+});
+
+form.addEventListener("submit", function(event) {
+
+    if (locationCaptured) {
+        return; // allow normal submit
+    }
+
+    event.preventDefault();
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
+
+                latInput.value = position.coords.latitude;
+                lngInput.value = position.coords.longitude;
+
+                locationCaptured = true; // prevent loop
+
+                form.submit();
+            },
+            function(error) {
+
+                console.log("Location error:", error);
+
+                locationCaptured = true; // prevent loop
+
+                form.submit();
+            },
+            { timeout: 3000 }
+        );
+    } else {
+        locationCaptured = true;
+        form.submit();
+    }
+
+});
+</script>
+
+</body>
+</html>

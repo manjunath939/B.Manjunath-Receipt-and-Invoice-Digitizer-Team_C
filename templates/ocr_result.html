@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OCR Result</title>
+
+    <!-- ✅ Stable Leaflet CDN -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"/>
+
+    <style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #eef2ff, #f9fafc);
+}
+
+.page-container {
+    width: 95%;
+    max-width: 1300px;
+    margin: auto;
+    padding: 40px 0;
+}
+
+h2 { margin-bottom: 25px; }
+
+.status-box {
+    background: #e6fffa;
+    border-left: 6px solid #10b981;
+    padding: 18px 22px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+.preview-box {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.preview-card {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+    width: 50%;
+}
+
+.preview-card img {
+    max-width: 100%;
+    border-radius: 12px;
+    border: 1px solid #eee;
+}
+
+.download-box {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+    text-align: center;
+    margin-top: 30px;
+}
+
+.download-box a {
+    display: inline-block;
+    margin: 10px;
+    padding: 12px 25px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    background: #6366f1;
+    color: white;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 30px;
+    font-weight: 600;
+    color: #6366f1;
+    text-decoration: none;
+}
+</style>
+</head>
+
+<body>
+<div class="page-container">
+
+    <h2>📄 OCR Processing Result</h2>
+
+    <div class="status-box">
+        ✅ OCR completed successfully
+    </div>
+
+    {% if is_edited %}
+    <div style="
+        background:#fff7ed;
+        border-left:6px solid #f59e0b;
+        padding:12px 18px;
+        border-radius:10px;
+        margin-bottom:20px;
+        font-weight:600;">
+        ✏ This document was edited after OCR extraction.
+    </div>
+    {% endif %}
+
+    <div class="preview-box">
+
+        <div class="preview-card">
+            <h4>Original Document</h4>
+            <img src="/uploads/{{ filename }}" alt="Original document">
+        </div>
+
+        <div class="preview-card">
+            <h4>Extracted Information</h4>
+            <p><strong>Vendor:</strong> {{ vendor or "—" }}</p>
+            <p><strong>Invoice No:</strong> {{ invoice_no or "—" }}</p>
+            <p><strong>Date:</strong> {{ bill_date or "—" }}</p>
+            <p><strong>Total:</strong> ₹{{ total_amount or "—" }}</p>
+
+            {% if items %}
+                <hr>
+                <ul>
+                    {% for item in items %}
+                        <li>{{ item.name }} — ₹{{ item.price }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+
+    <div style="text-align:center; margin-top:20px;">
+        <a href="{{ url_for('edit_ocr', filename=filename) }}"
+           style="background:#f59e0b; color:white; padding:10px 20px;
+                  border-radius:8px; text-decoration:none;">
+            ✏ Edit Extracted Data
+        </a>
+    </div>
+
+    <div class="download-box">
+        <h3>⬇ Download</h3>
+        <a href="{{ url_for('download', filename=filename) }}">Download Original</a>
+        <a href="{{ url_for('download_ocr_pdf', filename=filename) }}">Download PDF</a>
+    </div>
+
+    <a class="back-link" href="{{ url_for('dashboard') }}">
+        ← Back to Dashboard
+    </a>
+
+    <!-- ================= MAP SECTION ================= -->
+
+    <div style="margin-top:40px;">
+        <h4>📍 Upload Location</h4>
+        <div id="map" style="height:350px; border-radius:12px;"></div>
+    </div>
+
+</div>
+
+<!-- ✅ Leaflet JS (Placed BEFORE map script execution) -->
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    console.log("Leaflet object:", typeof L);
+
+    const lat = parseFloat("{{ latitude or '' }}");
+    const lng = parseFloat("{{ longitude or '' }}");
+
+    if (!isNaN(lat) && !isNaN(lng)) {
+
+        const map = L.map('map').setView([lat, lng], 15);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        L.marker([lat, lng])
+            .addTo(map)
+            .bindPopup("File uploaded from here")
+            .openPopup();
+
+    } else {
+        document.getElementById("map").innerHTML =
+            "<p style='padding:20px;color:#666;'>Location not available for this document.</p>";
+    }
+
+});
+</script>
+
+</body>
+</html>

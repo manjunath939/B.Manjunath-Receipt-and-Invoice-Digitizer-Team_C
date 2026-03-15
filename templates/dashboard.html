@@ -1,0 +1,167 @@
+<link rel="stylesheet" href="/static/css/dashboard.css">
+
+<div class="topbar">
+    <div class="top-left">
+    <h2>📁 Dashboard</h2>
+    <div class="greeting-wrapper">
+        <span id="greeting-text" class="greeting"></span>
+    </div>
+</div>
+    <div class="topbar-right">
+        <!-- Profile Picture -->
+        {% if profile_pic %}
+            <img src="{{ profile_pic }}" alt="Profile" class="profile-pic">
+        {% endif %}
+
+        <!-- Links -->
+         <button id="theme-toggle" class="theme-btn">🌙</button>
+        <a href="/upload">Upload</a>
+        <a href="/logout">Logout</a>
+    </div>
+</div>
+
+<!-- Upload Box -->
+<div class="upload-box reveal">
+    <h2>Upload Document</h2>
+    <p>Drag & Drop your receipt and invoice files here<br>
+       or <a href="/upload">Browse</a> to upload</p>
+    <a class="upload-btn" href="/upload">+ Upload Document</a>
+</div>
+
+<!-- Stats -->
+<div class="stats reveal">
+    <div class="stat-card">
+        <p>Total Documents</p>
+        <h1 class="counter" data-target="{{ total_docs }}">0</h1>
+    </div>
+    <div class="stat-card">
+        <p>This Month Uploads</p>
+        <h1 class="counter" data-target="{{ month_docs }}">0</h1>
+    </div>
+</div>
+
+<!-- AI Quick Stats -->
+<div class="ai-stats reveal">
+    <div class="ai-card">
+        <p>💰 Total Spending (This Year)</p>
+        <h2 class="counter" data-target="{{ total_spend }}">0</h2>
+    </div>
+
+    <div class="ai-card">
+        <p>📈 Avg Monthly Spending</p>
+        <h2 class="counter" data-target="{{ avg_monthly }}">0</h2>
+    </div>
+
+    <div class="ai-card">
+        <p>⚠️ Highest Month Spending</p>
+        <h2 class="counter" data-target="{{ highest_month_value }}">0</h2>
+    </div>
+</div>
+
+<!-- AI Insights -->
+<div class="ai-insights reveal">
+    <h3>🤖 AI Insights</h3>
+    <ul>
+        <li>🏆 Top Vendor: <strong>{{ top_vendor }}</strong></li>
+        <li>🔮 Predicted Next Month Spend: <strong>₹ {{ predicted_next }}</strong></li>
+    </ul>
+</div>
+
+<!-- Action Buttons -->
+<div class="actions reveal">
+    <!-- WORKING -->
+    <a class="action green" href="/trends">📈 Trends Over Time</a>
+    <a class="action purple" href="/recent">🕒 Recent Data</a>
+
+    <!-- NOT WORKING YET -->
+    <a class="action purple" href="/documents-by-category">📁 Documents by Vendor</a>
+    <a class="action green" href="/search">🔍 Search & Download</a>
+</div>
+
+<script>
+const counters = document.querySelectorAll('.counter');
+
+counters.forEach(counter => {
+    const target = +counter.getAttribute('data-target');
+    let count = 0;
+    const duration = 1500; // total animation time (ms)
+    const increment = target / (duration / 20);
+
+    const updateCount = () => {
+        if (count < target) {
+            count += increment;
+            counter.innerText = Math.floor(count).toLocaleString();
+            setTimeout(updateCount, 20);
+        } else {
+            counter.innerText = Number(target).toLocaleString();
+        }
+    };
+
+    updateCount();
+});
+
+const toggleBtn = document.getElementById("theme-toggle");
+
+// Load saved theme
+if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark");
+    toggleBtn.textContent = "☀️";
+}
+
+toggleBtn.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+
+    if (document.body.classList.contains("dark")) {
+        localStorage.setItem("theme", "dark");
+        toggleBtn.textContent = "☀️";
+    } else {
+        localStorage.setItem("theme", "light");
+        toggleBtn.textContent = "🌙";
+    }
+});
+
+const reveals = document.querySelectorAll(".reveal");
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+        } else {
+            entry.target.classList.remove("active");
+        }
+
+    });
+}, {
+    threshold: 0.15
+});
+
+reveals.forEach(reveal => {
+    observer.observe(reveal);
+});
+
+function getGreeting() {
+    const hour = new Date().getHours();
+
+    if (hour < 12) return "Good Morning";
+    if (hour < 17) return "Good Afternoon";
+    return "Good Evening";
+}
+
+const userName = "{{ user_name }}";
+const greetingText = `${getGreeting()}, ${userName} 👋`;
+
+const element = document.getElementById("greeting-text");
+
+let index = 0;
+
+function typeEffect() {
+    if (index < greetingText.length) {
+        element.textContent += greetingText.charAt(index);
+        index++;
+        setTimeout(typeEffect, 50);  // typing speed
+    }
+}
+
+typeEffect();
+</script>

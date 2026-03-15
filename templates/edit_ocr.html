@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit OCR</title>
+    <style>
+        body {
+            margin:0;
+            font-family:'Segoe UI', sans-serif;
+            background:linear-gradient(135deg,#eef2ff,#f9fafc);
+        }
+
+        .container {
+            width:95%;
+            max-width:1000px;
+            margin:40px auto;
+            background:white;
+            padding:35px;
+            border-radius:18px;
+            box-shadow:0 15px 35px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            margin-bottom:25px;
+        }
+
+        .grid {
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:25px;
+        }
+
+        input, textarea {
+            width:100%;
+            padding:12px;
+            border-radius:10px;
+            border:1px solid #ddd;
+            margin-top:6px;
+            margin-bottom:18px;
+        }
+
+        textarea {
+            height:120px;
+        }
+
+        .actions {
+            text-align:center;
+            margin-top:20px;
+        }
+
+        button {
+            padding:12px 30px;
+            border:none;
+            border-radius:10px;
+            background:#6366f1;
+            color:white;
+            font-weight:600;
+            cursor:pointer;
+        }
+
+        button:hover {
+            background:#4f46e5;
+        }
+
+        img {
+            max-width:100%;
+            border-radius:12px;
+            margin-bottom:20px;
+        }
+
+        @media(max-width:800px){
+            .grid{
+                grid-template-columns:1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+<h2>✏ Edit Extracted Data</h2>
+
+<img src="/uploads/{{ filename }}">
+
+<form method="POST" action="{{ url_for('save_ocr', filename=filename) }}">
+
+<div class="grid">
+    <div>
+        <label>Vendor</label>
+        <input type="text" name="vendor" value="{{ vendor or '' }}">
+
+        <label>Invoice No</label>
+        <input type="text" name="invoice_no" value="{{ invoice_no or '' }}">
+
+        <label>Date</label>
+        <input type="text" name="bill_date" value="{{ bill_date or '' }}">
+    </div>
+
+    <div>
+        <label>Total Amount</label>
+        <input type="text" name="total_amount" value="{{ total_amount or '' }}">
+
+        <label>Items (Item Name, Price)</label>
+        <textarea name="items">
+{% for item in items %}
+{{ item.name }}, {{ item.price }}
+{% endfor %}
+        </textarea>
+    </div>
+</div>
+
+<div class="actions">
+    <button type="submit">💾 Save Changes</button>
+</div>
+
+</form>
+
+</div>
+
+</body>
+</html>
